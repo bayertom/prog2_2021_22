@@ -32,7 +32,6 @@ def quickSort(x : list[float], l : int, r : int) ->list[float]:
         quickSort(x, i, r)
 
 def mergeSort(x: list[float], l: int, r: int) -> list[float]:
-
     #Mid index
     m = (l + r) // 2
 
@@ -86,10 +85,11 @@ def merge(x, l, m, r):
             j = j + 1
 
 def heapSort(x):
+    #Create empty heap
     n = len(x);
     h = [0]*(n+1)
 
-    #Create new heap
+    #Add elements to the heap and fiz it
     for i in range(n):
         h[i+1] = x[i]
         fhu(h, i + 1)
@@ -106,7 +106,7 @@ def heapSort(x):
 
         #Correct the heap from the root
         fhd(h,1,n)
-        
+
     #Elements in reversed order
     print(h)
 

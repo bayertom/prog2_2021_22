@@ -1,9 +1,11 @@
 def insertSort(x : list[float]) ->list[float]:
-
+    #Process all elements
     for i in range(len(x)):
+        #Common element and its index
         j = i
         p = x[i]
 
+        #Add element to the correct place
         while j > 0 and p < x[j-1]:
             #Swap x[j] and x[j-1]
             temp =  x[j]
@@ -14,8 +16,9 @@ def insertSort(x : list[float]) ->list[float]:
             j = j - 1
 
 def insertSort2(x : list[float]) ->list[float]:
-
+    # Process all elements
     for i in range(len(x)):
+        # Common element and its index
         j = i
         p = x[i]
 
@@ -29,8 +32,10 @@ def insertSort2(x : list[float]) ->list[float]:
         #Write p to correct position
         x[j] = p
 
-def bubbleSort(x : list[float]) ->list[float]:
+def bubbleSort(x : list[float]) ->list[float]: #Ascending order
+    # Process all elements
     for i in range(len(x)):
+
         #From left to right
         for j in range (len(x) -1 ,i, -1):
             #Swap elements
@@ -39,9 +44,11 @@ def bubbleSort(x : list[float]) ->list[float]:
                 x[j] = x[j - 1]
                 x[j - 1] = temp
 
-def bubbleSort2(x : list[float]) ->list[float]:
+def bubbleSort2(x : list[float]) ->list[float]: #Descending order
+    # Process all elements
     for i in range(len(x)):
         print('.')
+
         #From left to right
         for j in range (0, len(x) - i - 1):
             #Swap elements
@@ -75,18 +82,22 @@ def bubbleSort3(x : list[float]) ->list[float]:
             i = i+1
 
 def insertSort(x : list[float]) ->list[float]:
-
+    # Process all elements
     for i in range(len(x)):
 
+        #AInitialize minimum
         xmin = x[i]
         imin = i
+
         #Search for minimum
         for j in range(i, len(x)):
+
             #Actualize minimum
             if x[j] < xmin:
                 xmin = x[j]
                 imin = j
-
+                
+        #Swap elements
         temp = x[i]
         x[i] = x[imin]
         x[imin] = temp
