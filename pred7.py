@@ -1,70 +1,85 @@
-class TNode:
-    def __init__(self, data):
-        self.data = data
-        self.left = None
-        self.right = None
+class PQItem:
+    def __init__(self, priority, item):
+        self.priority = priority
+        self.item = item
 
-class BST:
-    def __init__(self):
-        self.root = None
+class PQ:
+    def __init__(self, n_max):
+        self.n = 0
+        self.h = [PQItem(0, 0)] * (n_max +1)
 
-    def preoder(self, u):
-        if u == None:
-            return
-        else:
-            print(u.data)
-            self.preoder(u.left)
-            self.preoder(u.right)
+    def print(self):
+        for i in range(1, self.n+1):
+            print(self.h[i].priority, self.h[i].item)
 
-    def insert(self, u, data):
-        if u == None:
-            u = TNode(data)
-        else:
-            if data < u.data:
-                u.left = self.insert(u.left, data)
-            elif data > u.data:
-                u.right = self.insert(u.right, data)
+    def fhu(self, i):
+        # Fix heap up
+        while i > 1 and self.h[i // 2].priority < self.h[i].priority:
+            #Swap elements
+            temp = self.h[i // 2]
+            self.h[i // 2] = self.h[i]
+            self.h[i] = temp
+
+            #Go to parent
+            i = i // 2
+
+    def fhd(self, i):
+        # Fix heap down
+        while 2*i <= self.n:
+            #Left child
+            k = 2 * i
+
+            #Right child is smaller
+            if k < self.n and self.h[k+1].priority > self.h[k].priority:
+                k = k + 1
+
+            #Swap elements
+            if self.h[i].priority < self.h[k].priority:
+                temp = self.h[i]
+                self.h[i] = self.h[k]
+                self.h[k] = temp
+
+            #Stop
             else:
-                return None
-        return u
+                break
 
-    def insertNode(self, data):
-        self.root = self.insert(self.root, data)
-        return self.root
+            #Go to parent
+            i = k
 
-    def Print(self):
-        self.preoder(self.root)
+    def push (self, priority, item):
+        #Add element to heap
+        self.n = self.n + 1
+        self.h[self.n] = PQItem(priority, item)
 
-    def find(self, data, u):
-        if u == None:
-            return None
-        if data == u.data:
-            return u
-        if data < u.data:
-            return self.find(data, u.left)
-        else:
-            return self.find(data, u.right)
-
-    def findNode(self, data):
-        return self.find(data, self.root)
-
-    def clear(self, u):
-        if u != None:
-            self.clear(u.left)
-            self.clear(u.right)
-            u = None
+        #Fix heap up
+        self.fhu(self.n)
 
 
-bst = BST()
-bst.insertNode(15)
-bst.insertNode(13)
-bst.insertNode(25)
-bst.Print()
+    def pop(self):
+        #Delete root
+        temp = self.h[1]
+        self.h[1] = self.h[self.n]
+        self.h[self.n] = temp
 
-u = bst.findNode(25)
-if u != None:
-    print(u.data)
-    print(p[0].data)
-else:
-    print('Not found')
+        #Shorter heap
+        self.n = self.n - 1
 
+        #Fix heap down
+        self.fhd(1)
+
+#Priority queue
+pq = PQ(10)
+
+#Add 3 points with given priority
+pq.push(1, [10, 10])
+pq.push(10, [15, 15])
+pq.push(13, [13, 13])
+
+#Remove points according to their priority
+pq.print()
+pq.pop()
+pq.print()
+pq.pop()
+pq.print()
+pq.pop()
+pq.print()

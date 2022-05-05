@@ -42,6 +42,29 @@ def recPath(u, v, P):
 
     return path
 
+def DFS(G, u, P):
+    #All nodes are new
+    S = ['N'] *  (len(G) + 1)
+    DFSR(G, S, P, u)
+
+def DFSR(G, S, P, u):
+    #Change status
+    S[u] = 'O'
+
+    #Browse its neighbors
+    for v in G[u]:
+        #Only new nodes
+        if S[v] == 'N':
+            #Remeber its predecessor
+            P[v] = u
+
+            #REcursive call
+            DFSR(G, S, P, v)
+
+    #Close node
+    S[u] = 'C'
+
+
 G = {
     1 : [2, 3, 5],
     2 : [1, 3, 4, 7, 8],
@@ -54,8 +77,9 @@ G = {
     9 : [4, 6, 8]
 }
 
+#BFS + DFS
 P = [None] * (len(G) + 1)
-#BFS(G, 1, P)
+DFS(G, 1, P)
 print(P)
 path = recPath(1, 9, P)
 
