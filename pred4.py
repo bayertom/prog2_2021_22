@@ -143,6 +143,7 @@ def fhd(h, i, n):
 
 
 x = [5 , -9, 38, 22, 24, 9, 1, 10 ]
+x = [-4, 5, 3, 0, 7, 9]
 #quickSort(x, 0, len(x)-1)
 #mergeSort(x, 0, len(x)-1)
 heapSort(x)
