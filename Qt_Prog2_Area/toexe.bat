@@ -1,0 +1,1 @@
+py -3.10-64 -m PyInstaller --onefile --windowed  MainFormArea.py
